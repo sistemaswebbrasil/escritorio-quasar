@@ -18,6 +18,7 @@
           :icon="darkMode ? 'light_mode' : 'dark_mode'"
           @click="toggleDarkMode"
         />
+        <q-btn dense flat round icon="settings" @click="customize" />
       </q-toolbar>
     </q-header>
 
@@ -42,6 +43,8 @@
     <q-footer reveal bordered class="bg-grey-8 text-white">
       <div class="text-center q-pa-sm">&copy; 2023 Your Company. All rights reserved.</div>
     </q-footer>
+
+    <LayoutCustomizer v-model="showCustomizer" />
   </q-layout>
 </template>
 
@@ -52,13 +55,18 @@ import EssentialLink, { type EssentialLinkProps } from 'components/EssentialLink
 import type { InternalLinkProps } from 'src/components/InternalLink.vue'
 import InternalLink from 'src/components/InternalLink.vue'
 import { useQuasar } from 'quasar'
-import { watch, onMounted } from 'vue'
+import { watch, onMounted, ref } from 'vue'
+import LayoutCustomizer from 'src/components/LayoutCustomizer.vue'
 
 const $q = useQuasar()
 const layoutStore = useLayoutStore()
 const { leftDrawerOpen, darkMode } = storeToRefs(layoutStore)
 const toggleLeftDrawer = () => layoutStore.toggleLeftDrawer()
 const toggleDarkMode = () => layoutStore.toggleDarkMode()
+const showCustomizer = ref(false)
+const customize = () => {
+  showCustomizer.value = true
+}
 
 // Sincronizar dark mode com Quasar
 watch(darkMode, (newValue) => {
