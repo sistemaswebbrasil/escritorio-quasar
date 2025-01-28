@@ -2,11 +2,11 @@
   <div class="fullscreen bg-blue text-white text-center q-pa-md flex flex-center">
     <div>
       <div style="font-size: 30vh">
-        404
+        {{ $t('pages.error.title') }}
       </div>
 
-      <div class="text-h2" style="opacity:.4">
-        Oops. Nothing here...
+      <div class="text-h2" style="opacity: 0.4">
+        {{ $t('pages.error.description') }}
       </div>
 
       <q-btn
@@ -15,7 +15,7 @@
         text-color="blue"
         unelevated
         to="/"
-        label="Go Home"
+        :label="$t('pages.error.backButton')"
         no-caps
       />
     </div>

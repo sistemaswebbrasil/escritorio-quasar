@@ -2,7 +2,7 @@
   <q-dialog v-model="isOpen" persistent>
     <q-card style="min-width: 350px">
       <q-card-section class="row items-center">
-        <div class="text-h6">Customizar Aparência</div>
+        <div class="text-h6">{{ $t('components.layoutCustomizer.title') }}</div>
         <q-space />
         <q-btn icon="close" flat round dense v-close-popup />
       </q-card-section>
@@ -11,8 +11,12 @@
         <q-list>
           <q-item tag="label">
             <q-item-section>
-              <q-item-label>Tema Escuro</q-item-label>
-              <q-item-label caption>Alternar entre tema claro e escuro</q-item-label>
+              <q-item-label>{{
+                $t('components.layoutCustomizer.settings.theme.label')
+              }}</q-item-label>
+              <q-item-label caption>{{
+                $t('components.layoutCustomizer.settings.theme.caption')
+              }}</q-item-label>
             </q-item-section>
             <q-item-section side>
               <q-toggle :model-value="darkMode" @update:model-value="layoutStore.toggleDarkMode" />
@@ -23,8 +27,12 @@
 
           <q-item tag="label">
             <q-item-section>
-              <q-item-label>Menu Horizontal</q-item-label>
-              <q-item-label caption>Alternar entre menu lateral e horizontal</q-item-label>
+              <q-item-label>{{
+                $t('components.layoutCustomizer.settings.menu.label')
+              }}</q-item-label>
+              <q-item-label caption>{{
+                $t('components.layoutCustomizer.settings.menu.caption')
+              }}</q-item-label>
             </q-item-section>
             <q-item-section side>
               <q-toggle
@@ -37,7 +45,12 @@
       </q-card-section>
 
       <q-card-actions align="right">
-        <q-btn flat label="Fechar" color="primary" v-close-popup />
+        <q-btn
+          flat
+          :label="$t('components.layoutCustomizer.close')"
+          color="primary"
+          v-close-popup
+        />
       </q-card-actions>
     </q-card>
   </q-dialog>

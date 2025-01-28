@@ -77,8 +77,9 @@ import type { InternalLinkProps } from 'src/components/InternalLink.vue'
 import InternalLink from 'src/components/InternalLink.vue'
 import { useQuasar } from 'quasar'
 import { watch, onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import LayoutCustomizer from 'src/components/LayoutCustomizer.vue'
-
+const { t } = useI18n()
 const $q = useQuasar()
 const layoutStore = useLayoutStore()
 const { leftDrawerOpen, darkMode, isHorizontalMenu } = storeToRefs(layoutStore)
@@ -111,20 +112,20 @@ watch(isHorizontalMenu, (newValue) => {
 
 const internalLinkList: InternalLinkProps[] = [
   {
-    title: 'Home',
+    title: t('pages.index.title'),
     caption: 'Go to home page',
     link: '/',
     icon: 'home',
     exact: true,
   },
   {
-    title: 'About',
+    title: t('pages.about.title'),
     caption: 'Learn more about us',
     link: '/about',
     icon: 'info',
   },
   {
-    title: 'Contact',
+    title: t('pages.contact.title'),
     caption: 'Get in touch with us',
     link: '/contact',
     icon: 'mail',
