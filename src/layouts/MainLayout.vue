@@ -10,6 +10,14 @@
           </q-avatar>
           Title
         </q-toolbar-title>
+
+        <q-btn
+          dense
+          flat
+          round
+          :icon="darkMode ? 'light_mode' : 'dark_mode'"
+          @click="toggleDarkMode"
+        />
       </q-toolbar>
     </q-header>
 
@@ -45,10 +53,29 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useLayoutStore } from 'src/stores/layoutStore'
 import EssentialLink, { type EssentialLinkProps } from 'components/EssentialLink.vue'
 import type { InternalLinkProps } from 'src/components/InternalLink.vue'
 import InternalLink from 'src/components/InternalLink.vue'
+import { useQuasar } from 'quasar'
+import { watch, onMounted } from 'vue'
+
+const $q = useQuasar()
+const layoutStore = useLayoutStore()
+const { leftDrawerOpen, darkMode } = storeToRefs(layoutStore)
+const toggleLeftDrawer = () => layoutStore.toggleLeftDrawer()
+const toggleDarkMode = () => layoutStore.toggleDarkMode()
+
+// Sincronizar dark mode com Quasar
+watch(darkMode, (newValue) => {
+  $q.dark.set(newValue)
+})
+
+// Inicializar dark mode
+onMounted(() => {
+  $q.dark.set(darkMode.value)
+})
 
 const internalLinkList: InternalLinkProps[] = [
   {
@@ -56,6 +83,7 @@ const internalLinkList: InternalLinkProps[] = [
     caption: 'Go to home page',
     link: '/',
     icon: 'home',
+    exact: true,
   },
   {
     title: 'About',
@@ -115,10 +143,4 @@ const linksList: EssentialLinkProps[] = [
     link: 'https://awesome.quasar.dev',
   },
 ]
-
-const leftDrawerOpen = ref(false)
-
-const toggleLeftDrawer = () => {
-  leftDrawerOpen.value = !leftDrawerOpen.value
-}
 </script>
