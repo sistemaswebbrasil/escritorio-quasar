@@ -15,7 +15,22 @@
               <q-item-label caption>Alternar entre tema claro e escuro</q-item-label>
             </q-item-section>
             <q-item-section side>
-              <q-toggle v-model="darkMode" />
+              <q-toggle :model-value="darkMode" @update:model-value="layoutStore.toggleDarkMode" />
+            </q-item-section>
+          </q-item>
+
+          <q-separator spaced />
+
+          <q-item tag="label">
+            <q-item-section>
+              <q-item-label>Menu Horizontal</q-item-label>
+              <q-item-label caption>Alternar entre menu lateral e horizontal</q-item-label>
+            </q-item-section>
+            <q-item-section side>
+              <q-toggle
+                :model-value="isHorizontalMenu"
+                @update:model-value="layoutStore.toggleMenuMode"
+              />
             </q-item-section>
           </q-item>
         </q-list>
@@ -47,5 +62,5 @@ const isOpen = computed({
 })
 
 const layoutStore = useLayoutStore()
-const { darkMode } = storeToRefs(layoutStore)
+const { darkMode, isHorizontalMenu } = storeToRefs(layoutStore)
 </script>

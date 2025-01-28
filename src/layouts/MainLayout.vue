@@ -2,7 +2,7 @@
   <q-layout view="hHh LpR lff">
     <q-header bordered class="bg-primary text-white">
       <q-toolbar>
-        <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
+        <q-btn v-if="!isHorizontalMenu" dense flat round icon="menu" @click="toggleLeftDrawer" />
 
         <q-toolbar-title>
           <q-avatar>
@@ -20,9 +20,22 @@
         />
         <q-btn dense flat round icon="settings" @click="customize" />
       </q-toolbar>
+
+      <!-- Menu Horizontal -->
+      <q-tabs v-if="isHorizontalMenu" align="left" class="bg-primary text-white">
+        <q-route-tab
+          v-for="link in internalLinkList"
+          :key="link.title"
+          :to="link.link"
+          :label="link.title"
+          :icon="link.icon"
+          :exact="link.exact"
+        />
+      </q-tabs>
     </q-header>
 
-    <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered>
+    <!-- Menu Vertical -->
+    <q-drawer v-if="!isHorizontalMenu" show-if-above v-model="leftDrawerOpen" side="left" bordered>
       <q-list>
         <q-item-label header> Internal Links </q-item-label>
 
@@ -60,7 +73,7 @@ import LayoutCustomizer from 'src/components/LayoutCustomizer.vue'
 
 const $q = useQuasar()
 const layoutStore = useLayoutStore()
-const { leftDrawerOpen, darkMode } = storeToRefs(layoutStore)
+const { leftDrawerOpen, darkMode, isHorizontalMenu } = storeToRefs(layoutStore)
 const toggleLeftDrawer = () => layoutStore.toggleLeftDrawer()
 const toggleDarkMode = () => layoutStore.toggleDarkMode()
 const showCustomizer = ref(false)
@@ -76,6 +89,16 @@ watch(darkMode, (newValue) => {
 // Inicializar dark mode
 onMounted(() => {
   $q.dark.set(darkMode.value)
+  if (isHorizontalMenu.value) {
+    layoutStore.leftDrawerOpen = false
+  }
+})
+
+// Fechar drawer quando mudar para menu horizontal
+watch(isHorizontalMenu, (newValue) => {
+  if (newValue) {
+    layoutStore.leftDrawerOpen = false
+  }
 })
 
 const internalLinkList: InternalLinkProps[] = [
