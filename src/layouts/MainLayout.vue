@@ -22,7 +22,14 @@
       </q-toolbar>
 
       <!-- Menu Horizontal -->
-      <q-tabs v-if="isHorizontalMenu" align="left" class="bg-primary text-white">
+      <q-tabs
+        v-if="isHorizontalMenu"
+        align="left"
+        class="bg-primary text-white"
+        dense
+        inline-label
+        shrink
+      >
         <q-route-tab
           v-for="link in internalLinkList"
           :key="link.title"
@@ -30,6 +37,7 @@
           :label="link.title"
           :icon="link.icon"
           :exact="link.exact"
+          no-caps
         />
       </q-tabs>
     </q-header>
@@ -168,3 +176,23 @@ const linksList: EssentialLinkProps[] = [
   },
 ]
 </script>
+
+<style scoped>
+.q-tabs {
+  min-height: 40px;
+}
+
+.q-tab {
+  min-height: 40px;
+  padding: 0 16px;
+}
+
+.q-tab__icon {
+  font-size: 1.2rem;
+  margin-right: 4px;
+}
+
+.q-tab__label {
+  font-size: 0.875rem;
+}
+</style>
