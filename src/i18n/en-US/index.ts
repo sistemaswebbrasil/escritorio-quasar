@@ -57,14 +57,21 @@ export default {
       settings: {
         title: 'Settings',
         theme: {
-          label: 'Theme',
+          label: 'Theme Dark',
           light: 'Light',
           dark: 'Dark',
+          caption: 'Toggle between light and dark theme',
         },
         language: {
           label: 'Language',
           english: 'English',
           portuguese: 'Portuguese',
+        },
+        menu: {
+          label: 'Menu Horizontal',
+          horizontal: 'Horizontal',
+          vertical: 'Vertical',
+          caption: 'Toggle between horizontal and vertical menu',
         },
       },
       close: 'Close',

@@ -58,14 +58,21 @@ export default {
       settings: {
         title: 'Configurações',
         theme: {
-          label: 'Tema',
+          label: 'Tema Escuro',
           light: 'Claro',
           dark: 'Escuro',
+          caption: 'Alternar entre temas claro e escuro',
         },
         language: {
           label: 'Idioma',
           english: 'Inglês',
           portuguese: 'Português',
+        },
+        menu: {
+          label: 'Menu Horizontal',
+          horizontal: 'Horizontal',
+          vertical: 'Vertical',
+          caption: 'Alternar entre menu horizontal e vertical',
         },
       },
       close: 'Fechar',
