@@ -22,7 +22,25 @@
         />
         <q-btn dense flat round icon="settings" @click="customize" />
 
-        <q-btn dense flat round icon="language" @click="toggleLanguage" />
+        <q-btn
+          dense
+          flat
+          :icon="
+            layoutStore.language === 'pt-BR'
+              ? 'img:https://flagcdn.com/24x18/br.png'
+              : 'img:https://flagcdn.com/24x18/us.png'
+          "
+          @click="toggleLanguage"
+        >
+          <q-tooltip>
+            {{
+              $t(
+                'components.layoutCustomizer.settings.language.' +
+                  (layoutStore.language === 'pt-BR' ? 'english' : 'portuguese'),
+              )
+            }}
+          </q-tooltip>
+        </q-btn>
       </q-toolbar>
 
       <!-- Menu Horizontal -->
@@ -101,6 +119,14 @@ const customize = () => {
 const toggleLanguage = () => {
   layoutStore.toggleLanguage()
   locale.value = layoutStore.language
+  $q.notify({
+    message: t(
+      'components.layoutCustomizer.settings.language.' +
+        (layoutStore.language === 'pt-BR' ? 'portuguese' : 'english'),
+    ),
+    position: 'bottom',
+    timeout: 1000,
+  })
 }
 
 // Sincronizar dark mode com Quasar
