@@ -1,7 +1,10 @@
 export default {
+  project: {
+    title: 'Office',
+    description: 'Office management project',
+  },
   failed: 'Action failed',
   success: 'Action was successful',
-
   pages: {
     index: {
       title: 'Welcome',

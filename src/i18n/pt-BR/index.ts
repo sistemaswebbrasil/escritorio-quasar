@@ -1,4 +1,8 @@
 export default {
+  project: {
+    title: 'Escritório',
+    description: 'Projeto de gerencimanto de escritório',
+  },
   failed: 'Ação falhou',
   success: 'Ação realizada com sucesso',
 

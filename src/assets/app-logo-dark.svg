@@ -1,0 +1,15 @@
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+    <!-- Scales -->
+    <g transform="translate(100,100)" stroke="#ffffff" stroke-width="3" fill="none">
+        <!-- Center pole -->
+        <line x1="0" y1="-50" x2="0" y2="50"/>
+        <!-- Top crossbar -->
+        <line x1="-50" y1="-50" x2="50" y2="-50"/>
+        <!-- Scale plates -->
+        <circle cx="-40" cy="-20" r="15"/>
+        <circle cx="40" cy="-20" r="15"/>
+        <!-- Support lines -->
+        <line x1="-40" y1="-50" x2="-40" y2="-35"/>
+        <line x1="40" y1="-50" x2="40" y2="-35"/>
+    </g>
+</svg>

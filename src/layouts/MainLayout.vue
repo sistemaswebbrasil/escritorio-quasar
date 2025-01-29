@@ -4,11 +4,13 @@
       <q-toolbar>
         <q-btn v-if="!isHorizontalMenu" dense flat round icon="menu" @click="toggleLeftDrawer" />
 
-        <q-toolbar-title>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg" />
+        <q-toolbar-title class="row items-center">
+          <q-avatar square class="q-mt-md q-mr-sm" size="60px">
+            <img :src="darkMode ? darkLogo : lightLogo" alt="Office Logo" />
           </q-avatar>
-          Title
+          <div class="text-center">
+            {{ $t('project.title') }}
+          </div>
         </q-toolbar-title>
 
         <q-btn
@@ -79,6 +81,9 @@ import { useQuasar } from 'quasar'
 import { watch, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import LayoutCustomizer from 'src/components/LayoutCustomizer.vue'
+import lightLogo from '../assets/app-logo-light.svg'
+import darkLogo from '../assets/app-logo-dark.svg'
+
 const { t } = useI18n()
 const $q = useQuasar()
 const layoutStore = useLayoutStore()
