@@ -7,6 +7,7 @@ export const useLayoutStore = defineStore('layout', {
       leftDrawerOpen: false,
       darkMode: localStorage.getItem('darkMode') === 'true',
       isHorizontalMenu: storedHorizontalMenu ? storedHorizontalMenu === 'true' : false,
+      language: localStorage.getItem('language') || 'pt-BR',
     }
   },
   actions: {
@@ -23,6 +24,10 @@ export const useLayoutStore = defineStore('layout', {
       if (this.isHorizontalMenu) {
         this.leftDrawerOpen = false
       }
+    },
+    toggleLanguage() {
+      this.language = this.language === 'pt-BR' ? 'en-US' : 'pt-BR'
+      localStorage.setItem('language', this.language)
     },
   },
 })

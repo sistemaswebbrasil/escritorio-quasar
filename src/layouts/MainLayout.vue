@@ -21,6 +21,8 @@
           @click="toggleDarkMode"
         />
         <q-btn dense flat round icon="settings" @click="customize" />
+
+        <q-btn dense flat round icon="language" @click="toggleLanguage" />
       </q-toolbar>
 
       <!-- Menu Horizontal -->
@@ -88,11 +90,17 @@ const { t } = useI18n()
 const $q = useQuasar()
 const layoutStore = useLayoutStore()
 const { leftDrawerOpen, darkMode, isHorizontalMenu } = storeToRefs(layoutStore)
+const { locale } = useI18n()
 const toggleLeftDrawer = () => layoutStore.toggleLeftDrawer()
 const toggleDarkMode = () => layoutStore.toggleDarkMode()
 const showCustomizer = ref(false)
 const customize = () => {
   showCustomizer.value = true
+}
+
+const toggleLanguage = () => {
+  layoutStore.toggleLanguage()
+  locale.value = layoutStore.language
 }
 
 // Sincronizar dark mode com Quasar
@@ -106,6 +114,7 @@ onMounted(() => {
   if (isHorizontalMenu.value) {
     layoutStore.leftDrawerOpen = false
   }
+  locale.value = layoutStore.language
 })
 
 // Fechar drawer quando mudar para menu horizontal
