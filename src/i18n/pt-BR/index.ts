@@ -77,5 +77,18 @@ export default {
       },
       close: 'Fechar',
     },
+    mainLayout: {
+      menu: {
+        internalLinks: 'Links Internos',
+        essentialLinks: 'Links Essenciais',
+      },
+      profile: {
+        profile: 'Perfil',
+        logout: 'Sair',
+      },
+      footer: {
+        copyright: '© 2023 Sua Empresa. Todos os direitos reservados.',
+      },
+    },
   },
 }

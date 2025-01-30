@@ -13,6 +13,8 @@
           </div>
         </q-toolbar-title>
 
+        <q-space />
+
         <q-btn
           dense
           flat
@@ -41,6 +43,33 @@
             }}
           </q-tooltip>
         </q-btn>
+
+        <!-- User Profile Button -->
+        <q-btn v-if="user" flat round>
+          <q-avatar size="32px">
+            <img :src="user?.picture || ''" :alt="user?.name || ''" />
+          </q-avatar>
+
+          <q-menu>
+            <q-list style="min-width: 200px">
+              <q-item clickable v-close-popup to="/profile">
+                <q-item-section avatar>
+                  <q-icon name="person" />
+                </q-item-section>
+                <q-item-section>{{ $t('components.mainLayout.profile.profile') }}</q-item-section>
+              </q-item>
+
+              <q-separator />
+
+              <q-item clickable v-close-popup @click="logout">
+                <q-item-section avatar>
+                  <q-icon name="logout" />
+                </q-item-section>
+                <q-item-section>{{ $t('components.mainLayout.profile.logout') }}</q-item-section>
+              </q-item>
+            </q-list>
+          </q-menu>
+        </q-btn>
       </q-toolbar>
 
       <!-- Menu Horizontal -->
@@ -67,12 +96,12 @@
     <!-- Menu Vertical -->
     <q-drawer v-if="!isHorizontalMenu" show-if-above v-model="leftDrawerOpen" side="left" bordered>
       <q-list>
-        <q-item-label header> Internal Links </q-item-label>
+        <q-item-label header> {{ $t('components.mainLayout.menu.internalLinks') }} </q-item-label>
 
         <InternalLink v-for="link in internalLinkList" :key="link.title" v-bind="link" />
       </q-list>
       <q-list>
-        <q-item-label header> Essential Links </q-item-label>
+        <q-item-label header> {{ $t('components.mainLayout.menu.essentialLinks') }} </q-item-label>
 
         <EssentialLink v-for="link in linksList" :key="link.title" v-bind="link" />
       </q-list>
@@ -84,7 +113,7 @@
     </q-page-container>
 
     <q-footer reveal bordered class="bg-grey-8 text-white">
-      <div class="text-center q-pa-sm">&copy; 2023 Your Company. All rights reserved.</div>
+      <div class="text-center q-pa-sm">{{ $t('components.mainLayout.footer.copyright') }}</div>
     </q-footer>
 
     <LayoutCustomizer v-model="showCustomizer" />
@@ -103,6 +132,7 @@ import { useI18n } from 'vue-i18n'
 import LayoutCustomizer from 'src/components/LayoutCustomizer.vue'
 import lightLogo from '../assets/app-logo-light.svg'
 import darkLogo from '../assets/app-logo-dark.svg'
+import { useAuth0 } from '@auth0/auth0-vue'
 
 const { t } = useI18n()
 const $q = useQuasar()
@@ -216,6 +246,10 @@ const linksList: EssentialLinkProps[] = [
     link: 'https://awesome.quasar.dev',
   },
 ]
+
+const auth0 = useAuth0()
+const { user } = useAuth0()
+const logout = () => auth0.logout()
 </script>
 
 <style scoped>
