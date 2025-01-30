@@ -13,11 +13,11 @@ declare module 'vue' {
 
 export default boot(async ({ app }: { app: App; router: Router }) => {
   const auth0 = createAuth0({
-    domain: 'dev-qmewyxosw8pdo5bi.us.auth0.com',
-    clientId: 'T892CwobXV5zgJGY1SBIxWknuzX5FWQC',
+    domain: import.meta.env.VITE_AUTH0_DOMAIN,
+    clientId: import.meta.env.VITE_AUTH0_CLIENT_ID,
     authorizationParams: {
-      redirect_uri: window.location.origin,
-      audience: 'https://dev-qmewyxosw8pdo5bi.us.auth0.com/api/v2/',
+      redirect_uri: import.meta.env.VITE_AUTH0_CALLBACK_URL,
+      audience: import.meta.env.VITE_AUTH0_AUDIENCE,
       scope: 'openid profile email',
     },
   })
