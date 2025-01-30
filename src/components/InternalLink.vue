@@ -12,14 +12,18 @@
       </q-item-section>
 
       <q-item-section>
-        <q-item-label>{{ title }}</q-item-label>
-        <q-item-label caption>{{ caption }}</q-item-label>
+        <q-item-label>{{ t(title) }}</q-item-label>
+        <q-item-label caption>{{ caption ? t(caption) : '' }}</q-item-label>
       </q-item-section>
     </q-item>
   </router-link>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
 export interface InternalLinkProps {
   title: string
   caption?: string

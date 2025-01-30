@@ -10,6 +10,7 @@ export default {
     index: {
       title: 'Bem-vindo',
       description: 'Esta é a página principal do nosso aplicativo',
+      caption: 'Bem-vindo ao nosso aplicativo!',
     },
     about: {
       title: 'Sobre Nós',
@@ -18,6 +19,7 @@ export default {
       mission:
         'Nossa missão é entregar produtos de alta qualidade que atendam às necessidades de nossos clientes. Valorizamos feedback e estamos sempre buscando maneiras de melhorar.',
       contactButton: 'Contate-nos',
+      caption: 'Saiba mais sobre nós',
     },
     contact: {
       title: 'Contato',
@@ -28,6 +30,7 @@ export default {
       officeHours:
         'Nosso horário de funcionamento é de segunda a sexta, das 9h às 17h. Aguardamos seu contato!',
       sendButton: 'Enviar Mensagem',
+      caption: 'Entre em contato conosco',
     },
     error: {
       title: '404',

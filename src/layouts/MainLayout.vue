@@ -127,7 +127,7 @@ import EssentialLink, { type EssentialLinkProps } from 'components/EssentialLink
 import type { InternalLinkProps } from 'src/components/InternalLink.vue'
 import InternalLink from 'src/components/InternalLink.vue'
 import { useQuasar } from 'quasar'
-import { watch, onMounted, ref } from 'vue'
+import { watch, onMounted, ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import LayoutCustomizer from 'src/components/LayoutCustomizer.vue'
 import lightLogo from '../assets/app-logo-light.svg'
@@ -180,31 +180,31 @@ watch(isHorizontalMenu, (newValue) => {
   }
 })
 
-const internalLinkList: InternalLinkProps[] = [
+const internalLinkList = computed((): InternalLinkProps[] => [
   {
     title: t('pages.index.title'),
-    caption: 'Go to home page',
+    caption: t('pages.index.caption'),
     link: '/',
     icon: 'home',
     exact: true,
   },
   {
     title: t('pages.about.title'),
-    caption: 'Learn more about us',
+    caption: t('pages.about.caption'),
     link: '/about',
     icon: 'info',
   },
   {
     title: t('pages.contact.title'),
-    caption: 'Get in touch with us',
+    caption: t('pages.contact.caption'),
     link: '/contact',
     icon: 'mail',
   },
-]
+])
 
-const linksList: EssentialLinkProps[] = [
+const linksList = computed((): EssentialLinkProps[] => [
   {
-    title: 'Docs',
+    title: t('components.essential.docs'),
     caption: 'quasar.dev',
     icon: 'school',
     link: 'https://quasar.dev',
@@ -245,7 +245,7 @@ const linksList: EssentialLinkProps[] = [
     icon: 'favorite',
     link: 'https://awesome.quasar.dev',
   },
-]
+])
 
 const auth0 = useAuth0()
 const { user } = useAuth0()

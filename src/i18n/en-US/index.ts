@@ -9,6 +9,7 @@ export default {
     index: {
       title: 'Welcome',
       description: 'This is the main page of our application',
+      caption: 'Welcome to our application!',
     },
     about: {
       title: 'About Us',
@@ -17,6 +18,7 @@ export default {
       mission:
         'Our mission is to deliver high-quality products that meet the needs of our customers. We value feedback and are always looking for ways to improve.',
       contactButton: 'Contact Us',
+      caption: 'Learn more about us',
     },
     contact: {
       title: 'Contact Us',
@@ -27,6 +29,7 @@ export default {
       officeHours:
         'Our office hours are Monday to Friday, 9 AM to 5 PM. We look forward to hearing from you!',
       sendButton: 'Send Message',
+      caption: 'Get in touch with us',
     },
     error: {
       title: '404',
