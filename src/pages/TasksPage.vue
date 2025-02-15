@@ -108,20 +108,100 @@
     </div>
   </q-page>
 
-  <q-dialog v-model="dialog">
-    <q-card>
+  <q-dialog v-model="dialog" persistent>
+    <q-card style="width: 800px; max-width: 80vw">
+      <q-card-section>
+        <div class="text-h6">
+          {{ formTask.id ? t('pages.tasks.editTask') : t('pages.tasks.newTask') }}
+        </div>
+      </q-card-section>
+
+      <q-separator />
+
+      <q-card-section style="max-height: 50vh" class="scroll">
+        <q-form @submit.prevent="saveTask" class="q-gutter-md">
+          <q-input
+            v-model="formTask.title"
+            :label="t('fields.title')"
+            :rules="[(val) => !!val || t('error.required')]"
+            outlined
+          />
+          <q-input
+            v-model="formTask.description"
+            :label="t('fields.description')"
+            type="textarea"
+            :rules="[(val) => !!val || t('error.required')]"
+            outlined
+          />
+          <q-select
+            v-model="formTask.status"
+            :options="statusOptions"
+            :label="t('fields.status')"
+            :option-label="(opt) => t(`enums.taskStatus.${opt}`)"
+            outlined
+          />
+        </q-form>
+      </q-card-section>
+
+      <q-separator />
+
+      <q-card-actions align="right">
+        <q-btn :label="t('pages.tasks.action.cancel')" color="grey" v-close-popup flat />
+        <q-btn
+          :label="formTask.id ? t('pages.tasks.action.update') : t('pages.tasks.action.create')"
+          color="primary"
+          v-on:click="saveTask"
+        />
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
+
+  <!-- <q-dialog v-model="dialog" persistent>
+    <q-card style="min-width: 800px; max-height: auto; margin: auto">
+      <q-card-section class="row items-center">
+        <div class="text-h6">
+          {{ formTask.id ? t('pages.tasks.editTask') : t('pages.tasks.newTask') }}
+        </div>
+        <q-space />
+        <q-btn icon="close" flat round dense v-close-popup />
+      </q-card-section>
+
+      <q-separator />
+
       <q-card-section>
         <q-form @submit.prevent="saveTask" class="q-gutter-md">
-          <q-input v-model="formTask.title" label="Title" />
-          <q-input v-model="formTask.description" label="Description" />
-          <q-select v-model="formTask.status" :options="statusOptions" label="Status" />
-          <div class="row justify-end">
-            <q-btn type="submit" label="Save" color="primary" />
+          <q-input
+            v-model="formTask.title"
+            :label="t('fields.title')"
+            :rules="[(val) => !!val || t('error.required')]"
+            outlined
+          />
+          <q-input
+            v-model="formTask.description"
+            :label="t('fields.description')"
+            type="textarea"
+            :rules="[(val) => !!val || t('error.required')]"
+            outlined
+          />
+          <q-select
+            v-model="formTask.status"
+            :options="statusOptions"
+            :label="t('fields.status')"
+            :option-label="(opt) => t(`enums.taskStatus.${opt}`)"
+            outlined
+          />
+          <div class="row justify-end q-gutter-sm">
+            <q-btn :label="t('pages.tasks.action.cancel')" color="grey" v-close-popup flat />
+            <q-btn
+              :label="formTask.id ? t('pages.tasks.action.update') : t('pages.tasks.action.create')"
+              type="submit"
+              color="primary"
+            />
           </div>
         </q-form>
       </q-card-section>
     </q-card>
-  </q-dialog>
+  </q-dialog> -->
 
   <q-dialog v-model="confirm.open" persistent :title="$t('confirm.generic.title')">
     <q-card>
@@ -296,7 +376,7 @@ const deleteTask = async (id: number) => {
 const dialog = ref(false)
 const confirm = ref({ open: false, actionConfirm: () => {} })
 const formTask = ref<Task>({ title: '', description: '', status: TaskStatus.TODO })
-const statusOptions = ['TODO', 'IN_PROGRESS', 'DONE']
+const statusOptions = Object.values(TaskStatus)
 
 function createTask() {
   formTask.value = { title: '', description: '', status: TaskStatus.TODO }
