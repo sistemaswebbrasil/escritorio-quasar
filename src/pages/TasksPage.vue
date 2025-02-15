@@ -129,20 +129,39 @@ const pagination = ref({
 })
 
 const columns = computed(() => [
-  { name: 'id', label: t('fields.id'), field: 'id', sortable: true },
-  { name: 'title', label: t('fields.title'), field: 'title', sortable: true },
-  { name: 'description', label: t('fields.description'), field: 'description' },
+  {
+    name: 'id',
+    label: t('fields.id'),
+    field: 'id',
+    sortable: true,
+    align: 'right' as const, // números à direita
+  },
+  {
+    name: 'title',
+    label: t('fields.title'),
+    field: 'title',
+    sortable: true,
+    align: 'left' as const, // texto à esquerda
+  },
+  {
+    name: 'description',
+    label: t('fields.description'),
+    field: 'description',
+    align: 'left' as const, // texto à esquerda
+  },
   {
     name: 'status',
     label: t('fields.status'),
     field: 'status',
     sortable: true,
+    align: 'left' as const, // enums/status à esquerda
   },
   {
     name: 'createdAt',
     label: t('fields.createdAt'),
     field: 'createdAt',
     sortable: true,
+    align: 'right' as const, // datas à direita
     format: (val: string) => DateFormatter.toLocaleString(val, locale.value),
   },
   {
@@ -150,9 +169,15 @@ const columns = computed(() => [
     label: t('fields.updatedAt'),
     field: 'updatedAt',
     sortable: true,
+    align: 'right' as const, // datas à direita
     format: (val: string) => DateFormatter.timeAgo(val, locale.value),
   },
-  { name: 'actions', label: t('fields.actions'), field: 'actions' },
+  {
+    name: 'actions',
+    label: t('fields.actions'),
+    field: 'actions',
+    align: 'center' as const, // ações centralizadas
+  },
 ])
 
 const getStatusColor = (status: string) => {
