@@ -110,10 +110,13 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { computed } from 'vue'
 import { useQuasar } from 'quasar'
 import TaskService, { type Task } from 'src/services/TaskService'
 import { useI18n } from 'vue-i18n'
+import { DateFormatter } from 'src/utils/DateFormatter'
 
+const { locale } = useI18n()
 const $q = useQuasar()
 const { t } = useI18n()
 const tasks = ref<Task[]>([])
@@ -125,14 +128,27 @@ const pagination = ref({
   rowsPerPage: 10,
 })
 
-const columns = [
-  { name: 'id', label: 'ID', field: 'id', sortable: true },
-  { name: 'title', label: 'Title', field: 'title', sortable: true },
-  { name: 'description', label: 'Description', field: 'description' },
-  { name: 'status', label: 'Status', field: 'status', sortable: true },
-  { name: 'createdAt', label: 'Created At', field: 'createdAt', sortable: true },
-  { name: 'actions', label: 'Actions', field: 'actions' },
-]
+const columns = computed(() => [
+  { name: 'id', label: t('fields.id'), field: 'id', sortable: true },
+  { name: 'title', label: t('fields.title'), field: 'title', sortable: true },
+  { name: 'description', label: t('fields.description'), field: 'description' },
+  { name: 'status', label: t('fields.status'), field: 'status', sortable: true },
+  {
+    name: 'createdAt',
+    label: t('fields.createdAt'),
+    field: 'createdAt',
+    sortable: true,
+    format: (val: string) => DateFormatter.toLocaleString(val, locale.value),
+  },
+  {
+    name: 'updatedAt',
+    label: t('fields.updatedAt'),
+    field: 'updatedAt',
+    sortable: true,
+    format: (val: string) => DateFormatter.timeAgo(val, locale.value),
+  },
+  { name: 'actions', label: t('fields.actions'), field: 'actions' },
+])
 
 const getStatusColor = (status: string) => {
   switch (status) {
@@ -159,9 +175,6 @@ const fetchTasks = async () => {
           icon: 'close',
           color: 'white',
           round: true,
-          handler: () => {
-            /* ... */
-          },
         },
       ],
       progress: true,
@@ -185,9 +198,6 @@ const deleteTask = async (id: number) => {
           icon: 'close',
           color: 'white',
           round: true,
-          handler: () => {
-            /* ... */
-          },
         },
       ],
       progress: true,
@@ -204,9 +214,6 @@ const deleteTask = async (id: number) => {
           icon: 'close',
           color: 'white',
           round: true,
-          handler: () => {
-            /* ... */
-          },
         },
       ],
       progress: true,
@@ -278,9 +285,6 @@ async function saveTask() {
           icon: 'close',
           color: 'white',
           round: true,
-          handler: () => {
-            /* ... */
-          },
         },
       ],
       progress: true,

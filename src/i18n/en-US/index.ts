@@ -4,25 +4,34 @@ export default {
     description: 'Office management project',
   },
   failed: 'Action failed',
+  fields: {
+    id: 'ID',
+    createdAt: 'Created at',
+    updatedAt: 'Updated at',
+    title: 'Title',
+    description: 'Description',
+    status: 'Status',
+    actions: 'Actions',
+  },
   success: {
-    create: 'Created successfully',
-    createId: 'Record created with id {id}',
-    update: 'Updated successfully',
-    updateId: 'Record with id {id} updated successfully',
-    delete: 'Deleted successfully',
-    deleteId: 'Record with id {id} deleted successfully',
+    create: 'Successfully created',
+    createId: 'Record {id} created successfully',
+    update: 'Successfully updated',
+    updateId: 'Record {id} updated successfully',
+    delete: 'Successfully deleted',
+    deleteId: 'Record {id} deleted successfully',
   },
   error: {
     generic: {
       title: 'Error',
       message: 'An unexpected error occurred',
     },
-    required: 'Required field',
+    required: 'Field required',
     create: 'Failed to create',
     update: 'Failed to update',
-    updateId: 'Failed to update record with id {id}',
+    updateId: 'Failed to update record {id}',
     delete: 'Failed to delete',
-    deleteId: 'Failed to delete record with id {id}',
+    deleteId: 'Failed to delete record {id}',
   },
 
   confirm: {
@@ -42,15 +51,15 @@ export default {
     about: {
       title: 'About Us',
       description:
-        'Welcome to our application! We are dedicated to providing the best service possible. Our team is composed of experienced professionals passionate about what they do.',
+        'Welcome to our application! We are dedicated to delivering the best possible service. Our team consists of experienced professionals who are passionate about what they do.',
       mission:
-        "Our mission is to deliver high-quality products that meet our customers' needs. We value feedback and are always looking for ways to improve.",
+        'Our mission is to deliver high-quality products that meet the needs of our customers. We value feedback and are always looking for ways to improve.',
       contactButton: 'Contact Us',
       caption: 'Learn more about us',
     },
     tasks: {
       title: 'Tasks',
-      description: 'Here you can see all available tasks',
+      description: 'Here you can view all available tasks',
       caption: 'Tasks',
       newTask: 'New Task',
       editTask: 'Edit Task',
@@ -68,7 +77,7 @@ export default {
         statusOptions: {
           pending: 'Pending',
           inProgress: 'In Progress',
-          done: 'Done',
+          done: 'Completed',
         },
         actions: 'Actions',
         delete: 'Delete',
@@ -91,9 +100,9 @@ export default {
     contact: {
       title: 'Contact',
       description:
-        'If you have any questions, do not hesitate to contact us. We are here to help you and provide the best service possible.',
-      emailInfo: 'You can contact us via email at',
-      phoneInfo: 'or call us at',
+        'If you have any questions, do not hesitate to contact us. We are here to help you and provide the best possible service.',
+      emailInfo: 'You can reach us by email at',
+      phoneInfo: 'or call',
       officeHours:
         'Our office hours are Monday to Friday, from 9 AM to 5 PM. We look forward to hearing from you!',
       sendButton: 'Send Message',
@@ -123,15 +132,15 @@ export default {
     },
     layoutCustomizer: {
       title: 'Customize Layout',
-      leftDrawer: 'Left Drawer',
-      rightDrawer: 'Right Drawer',
+      leftDrawer: 'Left Sidebar Menu',
+      rightDrawer: 'Right Sidebar Menu',
       settings: {
         title: 'Settings',
         theme: {
           label: 'Dark Theme',
           light: 'Light',
           dark: 'Dark',
-          caption: 'Toggle between light and dark themes',
+          caption: 'Switch between light and dark themes',
         },
         language: {
           label: 'Language',
@@ -139,10 +148,10 @@ export default {
           portuguese: 'Portuguese',
         },
         menu: {
-          label: 'Menu Orientation',
+          label: 'Horizontal Menu',
           horizontal: 'Horizontal',
           vertical: 'Vertical',
-          caption: 'Toggle between horizontal and vertical menu',
+          caption: 'Switch between horizontal and vertical menus',
         },
       },
       close: 'Close',
@@ -154,7 +163,7 @@ export default {
       },
       profile: {
         profile: 'Profile',
-        logout: 'Logout',
+        logout: 'Log Out',
       },
       footer: {
         copyright: '© 2023 Your Company. All rights reserved.',

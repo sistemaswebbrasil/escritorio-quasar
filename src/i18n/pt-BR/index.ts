@@ -4,6 +4,15 @@ export default {
     description: 'Projeto de gerencimanto de escritório',
   },
   failed: 'Ação falhou',
+  fields: {
+    id: 'ID',
+    createdAt: 'Criado em',
+    updatedAt: 'Atualizado em',
+    title: 'Título',
+    description: 'Descrição',
+    status: 'Status',
+    actions: 'Ações',
+  },
   success: {
     create: 'Criado com sucesso',
     createId: 'Registro criado com id {id}',
