@@ -5,10 +5,17 @@ export default {
   },
   failed: 'Ação falhou',
   success: 'Ação realizada com sucesso',
-
+  confirm: {
+    generic: {
+      title: 'Confirmação',
+      message: 'Você tem certeza que deseja realizar esta ação?',
+      confirm: 'Confirmar',
+      cancel: 'Cancelar',
+    },
+  },
   pages: {
     index: {
-      title: 'Bem-vindo',
+      title: 'Início',
       description: 'Esta é a página principal do nosso aplicativo',
       caption: 'Bem-vindo ao nosso aplicativo!',
     },
@@ -20,6 +27,46 @@ export default {
         'Nossa missão é entregar produtos de alta qualidade que atendam às necessidades de nossos clientes. Valorizamos feedback e estamos sempre buscando maneiras de melhorar.',
       contactButton: 'Contate-nos',
       caption: 'Saiba mais sobre nós',
+    },
+    tasks: {
+      title: 'Tarefas',
+      description: 'Aqui você pode ver todas as tarefas disponíveis',
+      caption: 'Tarefas',
+      newTask: 'Nova Tarefa',
+      editTask: 'Editar Tarefa',
+      deleteTask: 'Deletar Tarefa',
+      action: {
+        create: 'Criar',
+        update: 'Atualizar',
+        delete: 'Deletar',
+        cancel: 'Cancelar',
+      },
+      task: {
+        title: 'Título',
+        description: 'Descrição',
+        status: 'Status',
+        statusOptions: {
+          pending: 'Pendente',
+          inProgress: 'Em Progresso',
+          done: 'Concluída',
+        },
+        actions: 'Ações',
+        delete: 'Deletar',
+        new: {
+          title: 'Nova Tarefa',
+          submit: 'Criar',
+        },
+        edit: {
+          title: 'Editar Tarefa',
+          submit: 'Salvar',
+        },
+        confirmDelete: {
+          title: 'Deletar Tarefa',
+          message: 'Você tem certeza que deseja deletar esta tarefa?',
+          confirm: 'Deletar',
+          cancel: 'Cancelar',
+        },
+      },
     },
     contact: {
       title: 'Contato',

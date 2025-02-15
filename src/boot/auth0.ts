@@ -3,6 +3,8 @@ import type { Auth0Plugin } from '@auth0/auth0-vue'
 import { createAuth0 } from '@auth0/auth0-vue'
 import type { Router } from 'vue-router'
 import type { App } from 'vue'
+import { watch } from 'vue'
+import { useAuthStore } from '../stores'
 
 // Declare module augmentation for Vue
 declare module 'vue' {
@@ -12,6 +14,8 @@ declare module 'vue' {
 }
 
 export default boot(async ({ app }: { app: App; router: Router }) => {
+  const authStore = useAuthStore()
+
   const auth0 = createAuth0({
     domain: import.meta.env.VITE_AUTH0_DOMAIN,
     clientId: import.meta.env.VITE_AUTH0_CLIENT_ID,
@@ -27,4 +31,14 @@ export default boot(async ({ app }: { app: App; router: Router }) => {
 
   // Wait for Auth0 to initialize
   await auth0.checkSession()
+  // Store token in Pinia and local storage
+  watch(
+    () => auth0.isAuthenticated.value,
+    async (isAuthenticated) => {
+      if (isAuthenticated) {
+        const token = await auth0.getAccessTokenSilently()
+        authStore.setToken(token)
+      }
+    },
+  )
 })

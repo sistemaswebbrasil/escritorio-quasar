@@ -1,5 +1,6 @@
 import { useLayoutStore } from './layoutStore'
 import { useCounterStore } from './counterStore'
+import { useAuthStore } from './userStore'
 import { defineStore } from '#q-app/wrappers'
 import { createPinia } from 'pinia'
 
@@ -33,4 +34,4 @@ export default defineStore((/* { ssrContext } */) => {
   return pinia
 })
 
-export { useLayoutStore, useCounterStore }
+export { useLayoutStore, useCounterStore, useAuthStore }

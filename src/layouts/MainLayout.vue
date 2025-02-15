@@ -130,8 +130,8 @@ import { useQuasar } from 'quasar'
 import { watch, onMounted, ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import LayoutCustomizer from 'src/components/LayoutCustomizer.vue'
-import lightLogo from '../assets/app-logo-light.svg'
-import darkLogo from '../assets/app-logo-dark.svg'
+import lightLogo from '../assets/app-logo-light.png'
+import darkLogo from '../assets/app-logo-dark.png'
 import { useAuth0 } from '@auth0/auth0-vue'
 
 const { t } = useI18n()
@@ -187,6 +187,12 @@ const internalLinkList = computed((): InternalLinkProps[] => [
     link: '/',
     icon: 'home',
     exact: true,
+  },
+  {
+    title: t('pages.tasks.title'),
+    caption: t('pages.tasks.caption'),
+    link: '/tasks',
+    icon: 'assignment',
   },
   {
     title: t('pages.about.title'),
