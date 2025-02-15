@@ -4,7 +4,27 @@ export default {
     description: 'Projeto de gerencimanto de escritório',
   },
   failed: 'Ação falhou',
-  success: 'Ação realizada com sucesso',
+  success: {
+    create: 'Criado com sucesso',
+    createId: 'Registro criado com id {id}',
+    update: 'Atualizado com sucesso',
+    updateId: 'Registro com id {id} atualizado com sucesso',
+    delete: 'Deletado com sucesso',
+    deleteId: 'Registro com id {id} deletado com sucesso',
+  },
+  error: {
+    generic: {
+      title: 'Erro',
+      message: 'Ocorreu um erro inesperado',
+    },
+    required: 'Campo obrigatório',
+    create: 'Falha ao criar',
+    update: 'Falha ao atualizar',
+    updateId: 'Falha ao atualizar registro com id {id}',
+    delete: 'Falha ao deletar',
+    deleteId: 'Falha ao deletar registro com id {id}',
+  },
+
   confirm: {
     generic: {
       title: 'Confirmação',

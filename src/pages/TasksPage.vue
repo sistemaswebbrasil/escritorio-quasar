@@ -112,8 +112,10 @@
 import { ref, onMounted } from 'vue'
 import { useQuasar } from 'quasar'
 import TaskService, { type Task } from 'src/services/TaskService'
+import { useI18n } from 'vue-i18n'
 
 const $q = useQuasar()
+const { t } = useI18n()
 const tasks = ref<Task[]>([])
 const loading = ref(false)
 const pagination = ref({
@@ -149,13 +151,22 @@ const fetchTasks = async () => {
   try {
     loading.value = true
     tasks.value = await TaskService.getAllTasks()
-    $q.notify({
-      color: 'positive',
-      message: 'Tasks loaded successfully',
-    })
   } catch (error: unknown) {
     $q.notify({
+      position: 'center',
+      actions: [
+        {
+          icon: 'close',
+          color: 'white',
+          round: true,
+          handler: () => {
+            /* ... */
+          },
+        },
+      ],
+      progress: true,
       color: 'negative',
+      type: 'negative',
       message: 'Failed to load tasks',
       caption: error instanceof Error ? error.message : 'Unknown error',
     })
@@ -168,14 +179,40 @@ const deleteTask = async (id: number) => {
   try {
     await TaskService.deleteTask(id)
     $q.notify({
+      position: 'center',
+      actions: [
+        {
+          icon: 'close',
+          color: 'white',
+          round: true,
+          handler: () => {
+            /* ... */
+          },
+        },
+      ],
+      progress: true,
       color: 'positive',
-      message: 'Task deleted successfully',
+      type: 'positive',
+      message: t('success.deleteId', { id: id }),
     })
-    // await fetchTasks()
+    await fetchTasks()
   } catch (error: unknown) {
     $q.notify({
+      position: 'center',
+      actions: [
+        {
+          icon: 'close',
+          color: 'white',
+          round: true,
+          handler: () => {
+            /* ... */
+          },
+        },
+      ],
+      progress: true,
       color: 'negative',
-      message: 'Failed to delete task',
+      type: 'negative',
+      message: t('error.deleteId', { id: id }),
       caption: error instanceof Error ? error.message : 'Unknown error',
     })
   }
@@ -200,16 +237,58 @@ async function saveTask() {
   try {
     if (formTask.value.id) {
       await TaskService.updateTask(formTask.value.id, formTask.value)
+      $q.notify({
+        position: 'center',
+        actions: [
+          {
+            icon: 'close',
+            color: 'white',
+            round: true,
+          },
+        ],
+        progress: true,
+        color: 'positive',
+        type: 'positive',
+        message: t('success.updateId', { id: formTask.value.id }),
+      })
     } else {
-      await TaskService.createTask(formTask.value)
+      const data = await TaskService.createTask(formTask.value)
+      $q.notify({
+        position: 'center',
+        actions: [
+          {
+            icon: 'close',
+            color: 'white',
+            round: true,
+          },
+        ],
+        progress: true,
+        color: 'positive',
+        type: 'positive',
+        message: t('success.createId', { id: data.id }),
+      })
     }
     await fetchTasks()
     dialog.value = false
-    $q.notify({ color: 'positive', message: 'Task saved successfully' })
   } catch (error: unknown) {
     $q.notify({
+      position: 'center',
+      actions: [
+        {
+          icon: 'close',
+          color: 'white',
+          round: true,
+          handler: () => {
+            /* ... */
+          },
+        },
+      ],
+      progress: true,
       color: 'negative',
-      message: 'Error saving task',
+      type: 'negative',
+      message: formTask.value.id
+        ? t('error.updateId', { id: formTask.value.id })
+        : t('error.create'),
       caption: error instanceof Error ? error.message : 'Unknown error',
     })
   }
