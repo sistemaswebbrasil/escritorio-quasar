@@ -13,6 +13,13 @@ export default {
     status: 'Status',
     actions: 'Ações',
   },
+  enums: {
+    taskStatus: {
+      TODO: 'A Fazer',
+      IN_PROGRESS: 'Em Andamento',
+      DONE: 'Concluído',
+    },
+  },
   success: {
     create: 'Criado com sucesso',
     createId: 'Registro criado com id {id}',

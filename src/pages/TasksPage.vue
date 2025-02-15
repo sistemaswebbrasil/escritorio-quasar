@@ -46,7 +46,7 @@
         <template v-slot:body-cell-status="props">
           <q-td :props="props">
             <q-chip :color="getStatusColor(props.row.status)" text-color="white">
-              {{ props.row.status }}
+              {{ $t(`enums.taskStatus.${props.row.status}`) }}
             </q-chip>
           </q-td>
         </template>
@@ -112,7 +112,7 @@
 import { ref, onMounted } from 'vue'
 import { computed } from 'vue'
 import { useQuasar } from 'quasar'
-import TaskService, { type Task } from 'src/services/TaskService'
+import TaskService, { TaskStatus, type Task } from 'src/services/TaskService'
 import { useI18n } from 'vue-i18n'
 import { DateFormatter } from 'src/utils/DateFormatter'
 
@@ -132,7 +132,12 @@ const columns = computed(() => [
   { name: 'id', label: t('fields.id'), field: 'id', sortable: true },
   { name: 'title', label: t('fields.title'), field: 'title', sortable: true },
   { name: 'description', label: t('fields.description'), field: 'description' },
-  { name: 'status', label: t('fields.status'), field: 'status', sortable: true },
+  {
+    name: 'status',
+    label: t('fields.status'),
+    field: 'status',
+    sortable: true,
+  },
   {
     name: 'createdAt',
     label: t('fields.createdAt'),
@@ -227,11 +232,11 @@ const deleteTask = async (id: number) => {
 
 const dialog = ref(false)
 const confirm = ref({ open: false, actionConfirm: () => {} })
-const formTask = ref<Task>({ title: '', description: '', status: 'TODO' })
+const formTask = ref<Task>({ title: '', description: '', status: TaskStatus.TODO })
 const statusOptions = ['TODO', 'IN_PROGRESS', 'DONE']
 
 function createTask() {
-  formTask.value = { title: '', description: '', status: 'TODO' }
+  formTask.value = { title: '', description: '', status: TaskStatus.TODO }
   dialog.value = true
 }
 
