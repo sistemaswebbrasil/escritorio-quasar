@@ -37,7 +37,10 @@ export default boot(async ({ app }: { app: App; router: Router }) => {
     async (isAuthenticated) => {
       if (isAuthenticated) {
         const token = await auth0.getAccessTokenSilently()
-        authStore.setToken(token)
+        console.log(token)
+        const idToken = auth0.idTokenClaims.value?.__raw
+        console.log(JSON.stringify(idToken))
+        authStore.setToken(idToken ?? token)
       }
     },
   )

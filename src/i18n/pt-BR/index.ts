@@ -69,7 +69,7 @@ export default {
       description: 'Aqui você pode ver todas as tarefas disponíveis',
       caption: 'Tarefas',
       newTask: 'Nova Tarefa',
-      editTask: 'Editar Tarefa',
+      editTask: 'Editar Tarefa {id}',
       deleteTask: 'Deletar Tarefa',
       action: {
         create: 'Criar',

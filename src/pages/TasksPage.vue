@@ -23,20 +23,8 @@
         </template>
         <template v-slot:top-right>
           <q-btn-group flat>
-            <q-btn
-              color="primary"
-              :label="$t('pages.tasks.action.create')"
-              @click="createTask"
-              icon="add"
-            />
-            <q-btn
-              color="secondary"
-              icon="refresh"
-              flat
-              round
-              :loading="loading"
-              @click="fetchTasks"
-            >
+            <q-btn :label="$t('pages.tasks.action.create')" @click="createTask" icon="add" />
+            <q-btn icon="refresh" flat round :loading="loading" @click="fetchTasks">
               <template v-slot:loading>
                 <q-spinner-hourglass />
               </template>
@@ -112,7 +100,9 @@
     <q-card style="width: 800px; max-width: 80vw">
       <q-card-section>
         <div class="text-h6">
-          {{ formTask.id ? t('pages.tasks.editTask') : t('pages.tasks.newTask') }}
+          {{
+            formTask.id ? t('pages.tasks.editTask', { id: formTask.id }) : t('pages.tasks.newTask')
+          }}
         </div>
       </q-card-section>
 
@@ -276,16 +266,6 @@ const fetchTasks = async () => {
     tasks.value = await TaskService.getAllTasks()
   } catch (error: unknown) {
     $q.notify({
-      position: 'center',
-      actions: [
-        {
-          icon: 'close',
-          color: 'white',
-          round: true,
-        },
-      ],
-      progress: true,
-      color: 'negative',
       type: 'negative',
       message: 'Failed to load tasks',
       caption: error instanceof Error ? error.message : 'Unknown error',
@@ -299,32 +279,12 @@ const deleteTask = async (id: number) => {
   try {
     await TaskService.deleteTask(id)
     $q.notify({
-      position: 'top-right',
-      actions: [
-        {
-          icon: 'close',
-          color: 'white',
-          round: true,
-        },
-      ],
-      progress: true,
-      color: 'positive',
       type: 'positive',
       message: t('success.deleteId', { id: id }),
     })
     await fetchTasks()
   } catch (error: unknown) {
     $q.notify({
-      position: 'center',
-      actions: [
-        {
-          icon: 'close',
-          color: 'white',
-          round: true,
-        },
-      ],
-      progress: true,
-      color: 'negative',
       type: 'negative',
       message: t('error.deleteId', { id: id }),
       caption: error instanceof Error ? error.message : 'Unknown error',
@@ -361,32 +321,21 @@ async function onSubmit() {
     if (formTask.value.id) {
       await TaskService.updateTask(formTask.value.id, formTask.value)
       $q.notify({
-        position: 'center',
-        actions: [
-          {
-            icon: 'close',
-            color: 'white',
-            round: true,
-          },
-        ],
-        progress: true,
-        color: 'positive',
         type: 'positive',
         message: t('success.updateId', { id: formTask.value.id }),
       })
     } else {
       const data = await TaskService.createTask(formTask.value)
       $q.notify({
-        position: 'center',
         actions: [
           {
             icon: 'close',
-            color: 'white',
+
             round: true,
           },
         ],
         progress: true,
-        color: 'positive',
+
         type: 'positive',
         message: t('success.createId', { id: data.id }),
       })
@@ -395,16 +344,6 @@ async function onSubmit() {
     dialog.value = false
   } catch (error: unknown) {
     $q.notify({
-      position: 'center',
-      actions: [
-        {
-          icon: 'close',
-          color: 'white',
-          round: true,
-        },
-      ],
-      progress: true,
-      color: 'negative',
       type: 'negative',
       message: formTask.value.id
         ? t('error.updateId', { id: formTask.value.id })
