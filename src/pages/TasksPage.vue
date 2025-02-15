@@ -176,7 +176,9 @@ const columns = computed(() => [
     name: 'actions',
     label: t('fields.actions'),
     field: 'actions',
-    align: 'center' as const, // ações centralizadas
+    align: 'center' as const,
+    style: 'position: sticky; right: 0; z-index: 1;',
+    classes: $q.dark.isActive ? 'bg-dark' : 'bg-white',
   },
 ])
 
