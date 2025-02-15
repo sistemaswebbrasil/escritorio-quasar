@@ -14,6 +14,7 @@
         row-key="id"
         :loading="loading"
         v-model:pagination="pagination"
+        :grid="$q.screen.lt.md"
       >
         <template v-slot:loading>
           <q-inner-loading showing>
@@ -60,13 +61,48 @@
                 flat
                 round
                 icon="delete"
-                @click="
-                  confirm.open = true;
-                  confirm.actionConfirm = () => deleteTask(props.row.id)
-                "
+                @click="handleDelete(props.row.id)"
               />
             </q-btn-group>
           </q-td>
+        </template>
+
+        <template v-slot:item="props">
+          <div class="q-pa-xs col-xs-12 col-sm-6 col-md-4">
+            <q-card>
+              <q-card-section>
+                <div class="text-h6">{{ props.row.title }}</div>
+                <div class="text-subtitle2">{{ props.row.description }}</div>
+              </q-card-section>
+
+              <q-card-section>
+                <q-chip :color="getStatusColor(props.row.status)" text-color="white">
+                  {{ $t(`enums.taskStatus.${props.row.status}`) }}
+                </q-chip>
+              </q-card-section>
+
+              <q-card-section>
+                <div class="text-caption">
+                  {{ $t('fields.createdAt') }}:
+                  {{ DateFormatter.toLocaleString(props.row.createdAt, locale) }}
+                </div>
+                <div class="text-caption">
+                  {{ $t('fields.updatedAt') }}:
+                  {{ DateFormatter.timeAgo(props.row.updatedAt, locale) }}
+                </div>
+              </q-card-section>
+              <!-- prettier-ignore -->
+              <q-card-actions align="right">
+                <q-btn flat round icon="edit" @click="editTask(props.row)" />
+                <q-btn
+                  flat
+                  round
+                  icon="delete"
+                  @click="handleDelete(props.row.id)"
+                />
+              </q-card-actions>
+            </q-card>
+          </div>
         </template>
       </q-table>
     </div>
@@ -270,6 +306,15 @@ function createTask() {
 function editTask(task: Task) {
   formTask.value = { ...task }
   dialog.value = true
+}
+
+const handleDelete = (id: number) => {
+  confirm.value = {
+    open: true,
+    actionConfirm: () => {
+      void deleteTask(id)
+    },
+  }
 }
 
 async function saveTask() {
