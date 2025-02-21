@@ -19,23 +19,23 @@ export type CreateTaskDTO = Omit<Task, 'id' | 'createdAt' | 'updatedAt'>
 
 class TaskService {
   async getTaskById(id: number): Promise<Task> {
-    return (await api.get<Task>(`/integrator-api/api/tasks/${id}`)).data
+    return (await api.get<Task>(`/api/tasks/${id}`)).data
   }
 
   async updateTask(id: number, data: Partial<Task>): Promise<Task> {
-    return (await api.put<Task>(`/integrator-api/api/tasks/${id}`, data)).data
+    return (await api.put<Task>(`/api/tasks/${id}`, data)).data
   }
 
   async deleteTask(id: number): Promise<void> {
-    await api.delete(`/integrator-api/api/tasks/${id}`)
+    await api.delete(`/api/tasks/${id}`)
   }
 
   async getAllTasks(): Promise<Task[]> {
-    return (await api.get<Task[]>(`/integrator-api/api/tasks`)).data
+    return (await api.get<Task[]>(`/api/tasks`)).data
   }
 
   async createTask(data: CreateTaskDTO): Promise<Task> {
-    return (await api.post<Task>(`/integrator-api/api/tasks`, data)).data
+    return (await api.post<Task>(`/api/tasks`, data)).data
   }
 }
 

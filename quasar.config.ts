@@ -100,6 +100,26 @@ export default defineConfig((ctx) => {
       // https: true,
       open: true, // opens browser window automatically
       port: 3000,
+      proxy: {
+        '/api': {
+          target: process.env.VITE_API_INTEGRATOR_API_URL,
+          changeOrigin: true,
+          secure: false,
+          configure: (proxy) => {
+            proxy.on('error', (err, _req) => {
+              console.log('Proxy Error:', err)
+              console.log('Proxy Req:', _req)
+            })
+            proxy.on('proxyReq', (proxyReq, req) => {
+              console.log('Sending Request:', req.method, req.url)
+              console.log('Target URL:', proxyReq.path)
+            })
+            proxy.on('proxyRes', (proxyRes, req) => {
+              console.log('Received Response:', proxyRes.statusCode, req.url)
+            })
+          },
+        },
+      },
     },
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#framework
