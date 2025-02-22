@@ -57,23 +57,10 @@ export default defineConfig((ctx) => {
       port: 3000,
       proxy: {
         '/integrator-api/api': {
-          target: process.env.VITE_API_INTEGRATOR_API_URL, // https://adria4889.c44.integrator.host/integrator-api
+          target: process.env.VITE_API_INTEGRATOR_API_URL,
           changeOrigin: true,
           secure: false,
-          rewrite: (path) => path.replace(/^\/integrator-api\/api/, '/api'), // Keep /api
-          configure: (proxy) => {
-            proxy.on('error', (err, _req) => {
-              console.log('Proxy Error:', err)
-              console.log('Proxy Req:', _req)
-            })
-            proxy.on('proxyReq', (proxyReq, req) => {
-              console.log('Sending Request:', req.method, req.url)
-              console.log('Target URL:', proxyReq.path)
-            })
-            proxy.on('proxyRes', (proxyRes, req) => {
-              console.log('Received Response:', proxyRes.statusCode, req.url)
-            })
-          },
+          logLevel: 'debug',
         },
       },
     },
