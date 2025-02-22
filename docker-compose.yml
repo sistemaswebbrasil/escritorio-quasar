@@ -8,3 +8,4 @@ services:
     environment:
       - API_URL=https://adria4889.c44.integrator.host/integrator-api/api/
       - API_HOST=adria4889.c44.integrator.host
+      - API_VIACEP_URL=https://viacep.com.br
