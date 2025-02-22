@@ -10,7 +10,10 @@ declare module 'vue' {
 
 // Create Axios instance with base URL
 const api = axios.create({ baseURL: import.meta.env.VITE_API_INTEGRATOR_API_LOCAL_URL || '' })
-
+console.log(
+  'Axios baseURL:',
+  import.meta.env.VITE_API_INTEGRATOR_API_LOCAL_URL || 'None (using proxy)',
+)
 // Add a request interceptor to include the token in the Authorization header
 api.interceptors.request.use(
   (config) => {
