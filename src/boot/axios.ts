@@ -9,8 +9,7 @@ declare module 'vue' {
 }
 
 // Create Axios instance with base URL
-// const api = axios.create({ baseURL: 'http://localhost:8080' })
-const api = axios.create({ baseURL: '' })
+const api = axios.create({ baseURL: import.meta.env.VITE_API_INTEGRATOR_API_LOCAL_URL || '' })
 
 // Add a request interceptor to include the token in the Authorization header
 api.interceptors.request.use(
