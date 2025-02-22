@@ -62,6 +62,12 @@ export default defineConfig((ctx) => {
           secure: false,
           logLevel: 'debug',
         },
+        '/viacep-api/ws': {
+          target: process.env.VITE_API_VIACEP_API_URL,
+          changeOrigin: true,
+          secure: false,
+          logLevel: 'debug',
+        },
       },
     },
     framework: {

@@ -12,6 +12,7 @@ const routes: RouteRecordRaw[] = [
       { path: 'contact', component: () => import('pages/ContactPage.vue') },
       { path: 'profile', component: () => import('pages/ProfilePage.vue') },
       { path: 'tasks', component: () => import('pages/TasksPage.vue') },
+      { path: 'cep', component: () => import('pages/CepPage.vue') },
     ],
   },
 

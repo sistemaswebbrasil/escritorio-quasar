@@ -206,6 +206,12 @@ const internalLinkList = computed((): InternalLinkProps[] => [
     link: '/contact',
     icon: 'mail',
   },
+  {
+    title: t('pages.cep.title'),
+    caption: t('pages.cep.caption'),
+    link: '/cep',
+    icon: 'location_on',
+  },
 ])
 
 const linksList = computed((): EssentialLinkProps[] => [
